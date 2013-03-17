@@ -23,15 +23,17 @@ public class Physics : MonoBehaviour
 	
 	void FixedUpdate()
 	{
-		Vector2 thrusterForce =  thrusterController.GetForce();
+		Vector2 thrusterForce =  thrusterController.GetForce();		
+		Vector3 environmentForce = ApplyEnvironmentForce();
 		
-		//ApplyEnvironmentForce();
 		this.rigidbody.AddForce(new Vector3(thrusterForce.x, thrusterForce.y));		
+		this.rigidbody.AddForce(environmentForce);		
 	}
 	
-	private void ApplyEnvironmentForce()
+	private Vector3 ApplyEnvironmentForce()
 	{
+		Vector3 waterResistance = -this.rigidbody.velocity.magnitude * transform.up;
+		return waterResistance;
 	}
-
 	
 }

@@ -12,9 +12,14 @@ public class ThrusterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("VerticalPad")) {
-			
-			IncreaseSpeed ();
+
+		print(transform.forward);
+		if (Input.GetButtonDown ("VerticalPad"))
+		{
+			if(Input.GetAxis("VerticalPad") > 0)
+			{
+				IncreaseSpeed ();
+			}
 		}
 	}
 	

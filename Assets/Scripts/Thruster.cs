@@ -42,9 +42,7 @@ public class Thruster : MonoBehaviour
 	}	
 	
 	public Vector2 GetForce ()
-	{
-		Debug.Log(IsOn);
-		
+	{	
 		if (IsOn)
 		{					
 			
