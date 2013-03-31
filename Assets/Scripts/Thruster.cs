@@ -6,31 +6,18 @@ using System.Collections;
 /// </summary>
 public class Thruster : MonoBehaviour
 {
-	private Physics physics = null;
-	
 	protected Vector2 facing;
 	/// <summary>
 	/// По умолчанию тяговый двигатель смотрит в ту же сторону, что и родитель.
 	/// </summary>
 	protected float angleFromParentFacing = 0;
 	protected float maxForce = 10;
-	//protected bool isOn = false;
 
-	public bool IsOn = false;
-	/*{
-		get {
-			return isOn;
-		}
-		set {
-			isOn = value;
-		}
-	}*/
-	
+	public bool IsOn = false;	
 	
 	// Use this for initialization
 	void Start ()
 	{
-		physics = this.GetComponent<Physics> ();
 		facing =  new Vector2(0, 1);
 	}
 	

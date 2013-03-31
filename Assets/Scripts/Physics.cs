@@ -27,7 +27,9 @@ public class Physics : MonoBehaviour
 		Vector3 environmentForce = ApplyEnvironmentForce();
 		
 		this.rigidbody.AddForce(new Vector3(thrusterForce.x, thrusterForce.y));		
-		this.rigidbody.AddForce(environmentForce);		
+		this.rigidbody.AddForce(environmentForce);
+		
+		this.rigidbody.AddRelativeTorque(Vector3.up);
 	}
 	
 	private Vector3 ApplyEnvironmentForce()
