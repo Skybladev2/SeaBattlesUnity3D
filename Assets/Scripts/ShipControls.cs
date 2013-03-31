@@ -4,6 +4,7 @@ using System.Collections;
 public class ShipControls : MonoBehaviour
 {
 	public GUIText velocityText;
+	public GUIText angularVelocityText;
 	
 	// (целевая) скорость на каждой передаче в м/с
     private float[] gears = new float[] { 0, 10, 20, 30 };
@@ -28,7 +29,10 @@ public class ShipControls : MonoBehaviour
 			velocityText.text = this.rigidbody.velocity.ToString();
 		}
 		
-		
+		if(angularVelocityText != null)
+		{
+			angularVelocityText.text = this.rigidbody.angularVelocity.ToString();
+		}
 	}
 	
 	void FixedUpdate()

@@ -24,12 +24,16 @@ public class Physics : MonoBehaviour
 	void FixedUpdate()
 	{
 		Vector2 thrusterForce =  thrusterController.GetForce();		
-		Vector3 environmentForce = ApplyEnvironmentForce();
+		Vector3 environmentForce = ApplyEnvironmentForce();		
 		
 		this.rigidbody.AddForce(new Vector3(thrusterForce.x, thrusterForce.y));		
 		this.rigidbody.AddForce(environmentForce);
 		
-		this.rigidbody.AddRelativeTorque(Vector3.up);
+		Vector3 thrusterTorque = thrusterController.GetTorque();
+		Vector3 environmentTorque = ApplyEnvironmentTorque();
+		
+		this.rigidbody.AddRelativeTorque(thrusterTorque);
+		this.rigidbody.AddRelativeTorque(environmentTorque);
 	}
 	
 	private Vector3 ApplyEnvironmentForce()
@@ -38,4 +42,9 @@ public class Physics : MonoBehaviour
 		return waterResistance;
 	}
 	
+	private Vector3 ApplyEnvironmentTorque()
+	{
+		Vector3 waterRotationResistance = - this.rigidbody.angularVelocity.magnitude * 100 * Mathf.Sign(this.rigidbody.angularVelocity.z) * Vector3.forward;
+		return waterRotationResistance;
+	}	
 }

@@ -12,8 +12,8 @@ public class ThrusterController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+	{
 		//print(transform.forward);
 		if (Input.GetButtonDown ("VerticalPad"))
 		{
@@ -26,30 +26,37 @@ public class ThrusterController : MonoBehaviour {
 			{
 				DecreaseSpeed ();
 			}
+		}	
+				
+		if(Input.GetAxis("HorizontalPad") > 0)
+		{
+			TurnRight();
 		}
 		
-		if(Input.GetButtonDown("HorizontalPad"))
+		if(Input.GetAxis("HorizontalPad") < 0)
 		{
-			if(Input.GetAxis("HorizontalPad") > 0)
-			{
-				TurnRight();
-			}
-			
-			if(Input.GetAxis("HorizontalPad") < 0)
-			{
-				TurnLeft();
-			}
+			TurnLeft();
 		}
+		
+		if(Input.GetAxis("HorizontalPad") == 0)
+		{
+			StopTurn();
+		}		
 	}
 	
 	private void TurnLeft()
 	{
-		
+		rotationThruster.rotateDirection = RotateDirection.CounterClockwise;
 	}
 	
 	private void TurnRight()
 	{
-		
+		rotationThruster.rotateDirection = RotateDirection.Clockwise;
+	}
+	
+	private void StopTurn()
+	{
+		rotationThruster.rotateDirection = RotateDirection.Off;
 	}
 	
 	private void DecreaseSpeed()
@@ -88,4 +95,9 @@ public class ThrusterController : MonoBehaviour {
 		
 		return force;
 	}
+	
+	public Vector3 GetTorque()
+	{
+		return rotationThruster.GetTorque();
+	}	
 }

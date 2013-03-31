@@ -26,22 +26,21 @@ public class RotationThruster : MonoBehaviour
 	
 	}
 	
-	public Vector2 GetTorque ()
+	public Vector3 GetTorque ()
 	{	
-		
 		switch (rotateDirection)
 		{
 		case RotateDirection.Clockwise:
-			return Vector2.up * maxForce;
+			return Vector3.forward * maxForce;
 			
 		case RotateDirection.CounterClockwise:
-			return -Vector2.up * maxForce;
+			return -Vector3.forward * maxForce;
 			
 			case RotateDirection.Off:
-			return Vector2.zero;
+			return Vector3.zero;
 			
 			default:
-			return Vector2.zero;
+			return Vector3.zero;
 			break;
 		}
 	}
