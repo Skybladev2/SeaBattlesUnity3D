@@ -3,42 +3,39 @@ using System.Collections;
 
 public class Physics : MonoBehaviour
 {
-	public ThrusterController thrusterController = null;
-	/*public Vector3 resultantForce = Vector3.zero;
-	
-	public void ApplyForce(Vector2 force)
-	{
-		resultantForce += new Vector3(force.x, force.y);
-	}*/
+	public ThrusterController thrusterController = null;	
+	private float angle = 0;
 	
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	
 	}
 	
 	void FixedUpdate()
-	{
-		Vector2 thrusterForce =  thrusterController.GetForce();		
-		Vector3 environmentForce = ApplyEnvironmentForce();		
+	{		
+		//this.rigidbody.rotation = Quaternion.AngleAxis((angle++ * 0.1f), Vector3.forward);
 		
-		this.rigidbody.AddForce(new Vector3(thrusterForce.x, thrusterForce.y));		
-		this.rigidbody.AddForce(environmentForce);
+		//Vector3 thrusterForce =  thrusterController.GetForce();
+		//Vector3 environmentForce = ApplyEnvironmentForce();
+		//float velocityDt = (thrusterForce + environmentForce).magnitude * Time.deltaTime;		
 		
-		Vector3 thrusterTorque = thrusterController.GetTorque();
+		Vector3 torque = thrusterController.GetTorque();
 		Vector3 environmentTorque = ApplyEnvironmentTorque();
-		
-		this.rigidbody.AddRelativeTorque(thrusterTorque);
-		this.rigidbody.AddRelativeTorque(environmentTorque);
+		rigidbody.AddRelativeTorque(torque);
+		rigidbody.AddRelativeTorque(environmentTorque);
+		this.rigidbody.velocity = this.transform.up * 10;				
 	}
 	
 	private Vector3 ApplyEnvironmentForce()
-	{
-		Vector3 waterResistance = -this.rigidbody.velocity.magnitude * transform.up;
+	{		
+		Vector3 waterResistance = -this.rigidbody.velocity;
 		return waterResistance;
 	}
 	

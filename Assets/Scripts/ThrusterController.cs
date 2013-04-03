@@ -45,7 +45,7 @@ public class ThrusterController : MonoBehaviour {
 	}
 	
 	private void TurnLeft()
-	{
+	{		
 		rotationThruster.rotateDirection = RotateDirection.CounterClockwise;
 	}
 	
@@ -83,15 +83,14 @@ public class ThrusterController : MonoBehaviour {
         }
     }
 	
-	public Vector2 GetForce()
+	public Vector3 GetForce()
 	{
-		Vector2 force = Vector2.zero;
+		Vector3 force = Vector3.zero;
 		
 		foreach (Thruster thruster in thrusters)
         {
 			force += thruster.GetForce();
-		}
-		
+		}		
 		
 		return force;
 	}
