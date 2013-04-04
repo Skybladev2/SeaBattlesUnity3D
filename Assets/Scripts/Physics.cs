@@ -22,15 +22,20 @@ public class Physics : MonoBehaviour
 	{		
 		//this.rigidbody.rotation = Quaternion.AngleAxis((angle++ * 0.1f), Vector3.forward);
 		
-		//Vector3 thrusterForce =  thrusterController.GetForce();
-		//Vector3 environmentForce = ApplyEnvironmentForce();
-		//float velocityDt = (thrusterForce + environmentForce).magnitude * Time.deltaTime;		
+		Vector3 thrusterForce =  thrusterController.GetForce();
+		Vector3 environmentForce = ApplyEnvironmentForce();
+		Vector3 velocityDt = (thrusterForce + environmentForce) * Time.deltaTime;
+		float speedSign = Mathf.Sign(Vector3.Dot(velocityDt, this.transform.up));
+		
+		//	Debug.Log(thrusterForce + environmentForce);
+		//Debug.Log(velocityDt);
 		
 		Vector3 torque = thrusterController.GetTorque();
 		Vector3 environmentTorque = ApplyEnvironmentTorque();
 		rigidbody.AddRelativeTorque(torque);
 		rigidbody.AddRelativeTorque(environmentTorque);
-		this.rigidbody.velocity = this.transform.up * 10;				
+		
+		this.rigidbody.velocity = this.transform.up * (this.rigidbody.velocity.magnitude + speedSign * velocityDt.magnitude);				
 	}
 	
 	private Vector3 ApplyEnvironmentForce()

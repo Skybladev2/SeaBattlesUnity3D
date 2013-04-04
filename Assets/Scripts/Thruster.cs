@@ -17,7 +17,7 @@ public class Thruster : MonoBehaviour
 	/// По умолчанию тяговый двигатель смотрит в ту же сторону, что и родитель.
 	/// </summary>
 	protected float angleFromParentFacing = 0;
-	protected float maxForce = 1;
+	protected float maxForce = 10;
 
 	public bool IsOn = false;	
 	

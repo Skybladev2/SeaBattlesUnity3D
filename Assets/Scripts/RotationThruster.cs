@@ -13,7 +13,7 @@ public class RotationThruster : MonoBehaviour
 	//private Vector2 leftFacing;
 	public RotateDirection rotateDirection;
 	
-	private float maxForce = 10;
+	private float maxForce = 100;
 	
 	// Use this for initialization
 	void Start ()
