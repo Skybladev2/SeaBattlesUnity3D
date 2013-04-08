@@ -5,6 +5,7 @@ public class ThrusterController : MonoBehaviour {
 	
 	public Thruster[] thrusters = new Thruster [2];
 	public RotationThruster rotationThruster = null;
+	public bool PlayerControlled = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,34 +15,36 @@ public class ThrusterController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		//print(transform.forward);
-		if (Input.GetButtonDown ("VerticalPad"))
+		if (PlayerControlled)		
 		{
-			if(Input.GetAxis("VerticalPad") > 0)
+			if (Input.GetButtonDown ("VerticalPad"))
 			{
-				IncreaseSpeed ();
+				if(Input.GetAxis("VerticalPad") > 0)
+				{
+					IncreaseSpeed ();
+				}
+				
+				if(Input.GetAxis("VerticalPad") < 0)
+				{
+					DecreaseSpeed ();
+				}
+			}	
+					
+			if(Input.GetAxis("HorizontalPad") > 0)
+			{
+				TurnRight();
 			}
 			
-			if(Input.GetAxis("VerticalPad") < 0)
+			if(Input.GetAxis("HorizontalPad") < 0)
 			{
-				DecreaseSpeed ();
+				TurnLeft();
 			}
-		}	
-				
-		if(Input.GetAxis("HorizontalPad") > 0)
-		{
-			TurnRight();
+			
+			if(Input.GetAxis("HorizontalPad") == 0)
+			{
+				StopTurn();
+			}
 		}
-		
-		if(Input.GetAxis("HorizontalPad") < 0)
-		{
-			TurnLeft();
-		}
-		
-		if(Input.GetAxis("HorizontalPad") == 0)
-		{
-			StopTurn();
-		}		
 	}
 	
 	private void TurnLeft()
