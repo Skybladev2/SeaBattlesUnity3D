@@ -31,10 +31,10 @@ public class RotationThruster : MonoBehaviour
 		switch (rotateDirection)
 		{
 		case RotateDirection.Clockwise:
-			return Vector3.forward * maxForce;
+			return Vector3.up * maxForce;
 			
 		case RotateDirection.CounterClockwise:
-			return -Vector3.forward * maxForce;
+			return -Vector3.up * maxForce;
 			
 			case RotateDirection.Off:
 			return Vector3.zero;

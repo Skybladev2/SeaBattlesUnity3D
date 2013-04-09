@@ -10,7 +10,7 @@ public class Thruster : MonoBehaviour
 	{
 		get
 		{
-			return this.transform.up;
+			return this.transform.forward;
 		}
 	}
 	/// <summary>
